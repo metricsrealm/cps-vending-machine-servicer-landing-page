@@ -19,11 +19,11 @@ export default function FinalCTA() {
         <div className="max-w-3xl mx-auto">
           {/* Title */}
           <h2 className="font-display font-extrabold text-[28px] sm:text-[34px] md:text-[40px] text-white leading-tight mb-3.5">
-            Ready to upgrade your breakroom?
+            Upgrade Your Utah Workplace Vending Today
           </h2>
           {/* Subtitle */}
           <p className="font-sans text-[#CBD6E6] text-[17px] max-w-[560px] mx-auto leading-relaxed mb-[30px]">
-            Get a free, no-obligation quote from a local Utah team that handles everything. Take the first step toward a happier workplace.
+            Get a free, no-obligation quote from Utah's premier vending machine supplier. We handle all installation, stocking, and maintenance so you can focus on your business.
           </p>
 
           {/* Action Row */}

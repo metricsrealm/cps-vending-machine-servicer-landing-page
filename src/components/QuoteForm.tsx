@@ -162,26 +162,44 @@ export default function QuoteForm() {
                           LOOK FOR A NEW SERVICE
                         </label>
                         <div className="flex gap-[28px]">
-                          <label className="flex items-center gap-[7px] cursor-pointer text-[14px] text-navy font-semibold select-none">
+                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
                             <input
                               type="radio"
                               name="lookForNewService"
                               value="Yes"
                               checked={formData.lookForNewService === "Yes"}
                               onChange={handleInputChange}
-                              className="w-[17px] h-[17px] border-line focus:ring-orange accent-orange cursor-pointer"
+                              className="sr-only"
                             />
+                            <div className={`relative w-[18px] h-[18px] rounded-full border-[1.5px] transition-all duration-200 ${
+                              formData.lookForNewService === "Yes"
+                                ? "border-[#E05A10] bg-white"
+                                : "border-slate-300 bg-white group-hover:border-slate-400"
+                            }`}>
+                              {formData.lookForNewService === "Yes" && (
+                                <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
+                              )}
+                            </div>
                             <span>Yes</span>
                           </label>
-                          <label className="flex items-center gap-[7px] cursor-pointer text-[14px] text-navy font-semibold select-none">
+                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
                             <input
                               type="radio"
                               name="lookForNewService"
                               value="No"
                               checked={formData.lookForNewService === "No"}
                               onChange={handleInputChange}
-                              className="w-[17px] h-[17px] border-line focus:ring-orange accent-orange cursor-pointer"
+                              className="sr-only"
                             />
+                            <div className={`relative w-[18px] h-[18px] rounded-full border-[1.5px] transition-all duration-200 ${
+                              formData.lookForNewService === "No"
+                                ? "border-[#E05A10] bg-white"
+                                : "border-slate-300 bg-white group-hover:border-slate-400"
+                            }`}>
+                              {formData.lookForNewService === "No" && (
+                                <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
+                              )}
+                            </div>
                             <span>No</span>
                           </label>
                         </div>

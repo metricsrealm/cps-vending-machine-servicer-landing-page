@@ -2,20 +2,20 @@ export default function HowItWorks() {
   const steps = [
     {
       num: 1,
-      title: "Discuss your space",
-      desc: "Tell us about your space and what your team wants — by phone, email, or the form.",
+      title: "Discuss Your Workplace Needs",
+      desc: "Contact us by phone, email, or our free quote form to tell us about your Utah facility size and employee snack preferences.",
       isHighlight: false,
     },
     {
       num: 2,
-      title: "Customize your mix",
-      desc: "We design a tailored machine and product mix for your space, with clear terms up front.",
+      title: "Custom Machine Selection",
+      desc: "We design a tailored breakroom solution with snack, cold drink, and healthy vending machine mixes suited specifically for your team.",
       isHighlight: true,
     },
     {
       num: 3,
-      title: "Delivery & upkeep",
-      desc: "We set the machines up, then keep them stocked and maintained so you never think about it.",
+      title: "Free Installation & Care",
+      desc: "We deliver and install your machines at zero cost, then manage all restocking, cleaning, and maintenance on a regular schedule.",
       isHighlight: false,
     },
   ];
@@ -26,13 +26,13 @@ export default function HowItWorks() {
         {/* Section Header */}
         <div className="max-w-[680px] mx-auto text-center mb-[46px]">
           <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange">
-            Simple setup
+            3-Step Office Vending Setup
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            How it works
+            How Our Vending Service Works
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            Three easy steps from first call to a fully managed breakroom.
+            From our free initial site assessment to seamless machine placement and daily stocking, we make workplace vending simple.
           </p>
         </div>
 

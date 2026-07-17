@@ -4,10 +4,10 @@ import QuoteForm from "./QuoteForm";
 
 export default function Hero() {
   const ticks = [
-    "Refill, restock & maintenance handled",
-    "Apple Pay, Google Pay & cards",
-    "Real-time inventory tracking",
-    "Guaranteed product delivery",
+    "Free vending machine installation",
+    "Local Utah stocking & restocking",
+    "Cashless taps, Apple Pay & cards",
+    "24/7 smart inventory & maintenance",
   ];
 
   return (
@@ -37,12 +37,12 @@ export default function Hero() {
 
             {/* Heading */}
             <h1 className="font-display font-extrabold text-[34px] sm:text-[40px] md:text-[48px] lg:text-[52px] text-white tracking-tight leading-[1.15] mb-[18px]">
-              Full-Service Vending Machines for Your <span className="text-orange">Utah Workplace</span>
+              Full-Service <span className="text-orange">Vending Machine Services</span> for Utah Businesses
             </h1>
 
             {/* Subheading */}
             <p className="text-[18px] text-[#D5DEEC] font-normal leading-relaxed mb-[26px] max-w-[500px]">
-              We stock, service and maintain everything — cashless taps and reliable cash, always ready. You just enjoy the breakroom.
+              We handle complete workplace vending solutions at zero cost to you—including free installation, modern restocking, and 24/7 maintenance.
             </p>
 
             {/* Core USP Ticks */}

@@ -6,33 +6,33 @@ export default function FAQ() {
   const faqItems: FAQItem[] = [
     {
       id: "faq-1",
-      question: "What does full-service vending include?",
-      answer: "We handle refilling, restocking and maintenance — the machines are managed end-to-end by our team. You provide the space; we keep everything running.",
+      question: "What does full-service vending machine management include?",
+      answer: "Our vending services are 100% full-service. We handle free delivery, professional installation, proactive restocking, and regular machine maintenance at absolutely no cost to your business.",
     },
     {
       id: "faq-2",
-      question: "What products can we get in the machines?",
-      answer: "Snacks, cold drinks and more — we tailor the product mix to what your team actually wants and adjust based on what sells.",
+      question: "What snacks and beverages can be stocked in our breakroom?",
+      answer: "We offer a wide selection of popular brand-name snacks, cold drinks, carbonated sodas, healthy alternative foods, energy drinks, and juices tailored to your employees' specific requests.",
     },
     {
       id: "faq-3",
-      question: "What payment methods do the machines accept?",
-      answer: "Credit and debit cards, Apple Pay and Google Pay via secure Cantaloupe readers — plus well-maintained bill and coin acceptors for cash.",
+      question: "Do your Utah vending machines support cashless payment options?",
+      answer: "Yes. All of our vending systems are equipped with secure card readers supporting credit cards, debit cards, Apple Pay, Google Pay, and other cashless taps, alongside traditional cash/coin options.",
     },
     {
       id: "faq-4",
-      question: "What if the machine takes someone's money?",
-      answer: "Guaranteed product delivery: infrared sensors confirm the item dropped. If it doesn't, the machine automatically re-vends or refunds — no lost money.",
+      question: "What happens if a vending machine has an error or drop issue?",
+      answer: "Our machines use advanced infrared product sensors to verify every transaction. If an item fails to drop, the machine automatically tries again or refunds the user, preventing lost-money hassles.",
     },
     {
       id: "faq-5",
-      question: "What if a machine breaks or runs low?",
-      answer: "Real-time telemetry flags low stock and issues, and our team handles proactive maintenance and repairs to keep downtime low.",
+      question: "How do you handle vending machine maintenance and restocking?",
+      answer: "We use built-in smart telemetry to track inventory and machine health in real time. Our local service trucks dispatch automatically for restocking and prompt repairs to guarantee high uptime.",
     },
     {
       id: "faq-6",
-      question: "Which areas of Utah do you serve?",
-      answer: "We serve Salt Lake City and the surrounding metro, plus businesses statewide across Utah. If you're not sure we reach you, give us a call.",
+      question: "Which Utah cities and business types do you service?",
+      answer: "We provide commercial vending services to offices, warehouses, manufacturing plants, and distribution centers in Salt Lake City, West Valley City, West Jordan, Provo, Orem, Sandy, Ogden, Draper, Murray, South Jordan, and Lehi.",
     },
   ];
 

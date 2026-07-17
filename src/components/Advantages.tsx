@@ -9,8 +9,8 @@ export default function Advantages() {
           <path d="M9 21V9h6v12" />
         </svg>
       ),
-      title: "We handle everything",
-      desc: "Refilling, restocking and maintenance are on us. You supply the space; we manage the machines.",
+      title: "Full-Service Vending Management",
+      desc: "We handle everything: free installation, daily restocking, and proactive maintenance. You provide the space; our local team manages your commercial vending machines.",
     },
     {
       svg: (
@@ -19,8 +19,8 @@ export default function Advantages() {
           <path d="M2 10h20" />
         </svg>
       ),
-      title: "Pay your way",
-      desc: "Cashless taps with Apple Pay, Google Pay and cards — plus reliable bill and coin acceptance for everyone else.",
+      title: "Modern Cashless Payments",
+      desc: "All our office vending machines support contactless payments—including Apple Pay, Google Pay, credit cards, and debit cards, plus cash and coins.",
     },
     {
       svg: (
@@ -29,8 +29,8 @@ export default function Advantages() {
           <path d="M18 9l-5 5-3-3-3 3" />
         </svg>
       ),
-      title: "Always stocked",
-      desc: "Real-time inventory tracking keeps your favorites available and minimizes empty-machine moments.",
+      title: "Smart Inventory & Restocking",
+      desc: "We use advanced real-time telemetry to monitor inventory 24/7, restocking popular snack and beverage options before they ever run out.",
     },
     {
       svg: (
@@ -39,8 +39,8 @@ export default function Advantages() {
           <circle cx="12" cy="7" r="4" />
         </svg>
       ),
-      title: "Local Utah team",
-      desc: "Proactive maintenance and friendly support from a local team serving Salt Lake City and beyond.",
+      title: "Trusted Local Utah Service",
+      desc: "Enjoy rapid response times and expert support from our local team, proudly serving businesses across Salt Lake City, Provo, Ogden, and beyond.",
     },
   ];
 
@@ -50,13 +50,13 @@ export default function Advantages() {
         {/* Section Header */}
         <div className="max-w-[680px] mx-auto text-center mb-[46px]">
           <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange">
-            Why CPS
+            Utah's Vending Experts
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            A breakroom that runs itself
+            Professional Vending Machine Services for Utah Businesses
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            We handle the machines end-to-end, so your team gets fresh snacks and cold drinks without the hassle — and you get none of the upkeep.
+            We provide comprehensive, worry-free vending machine supplier services. From free machine placement to modern restocking and rapid repairs, we do it all.
           </p>
         </div>
 

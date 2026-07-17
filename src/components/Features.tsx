@@ -11,8 +11,8 @@ export default function Features() {
           <circle cx="18.5" cy="18.5" r="2.5" />
         </svg>
       ),
-      title: "Guaranteed product delivery",
-      desc: "Infrared sensors confirm the item dropped — if it doesn't, the machine re-vends or refunds automatically.",
+      title: "Guaranteed Product Delivery",
+      desc: "Modern infrared drop sensors verify every transaction. If an item fails to drop, the system automatically re-vends or refunds, eliminating lost-money frustrations.",
     },
     {
       svg: (
@@ -25,8 +25,8 @@ export default function Features() {
           <line x1="3" y1="18" x2="3.01" y2="18" />
         </svg>
       ),
-      title: "Smart inventory management",
-      desc: "Telemetry tracks sales in real time, so restocks happen before you run out of the popular stuff.",
+      title: "Smart Inventory Monitoring",
+      desc: "Integrated smart telemetry monitors inventory levels in real time. We automatically schedule stocking runs before your team's favorite choices run low.",
     },
     {
       svg: (
@@ -34,8 +34,8 @@ export default function Features() {
           <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
         </svg>
       ),
-      title: "Energy efficient",
-      desc: "ENERGY STAR machines keep cold drinks cold while sipping power — kind to your utility bill.",
+      title: "Eco-Friendly Energy Efficiency",
+      desc: "Energy Star certified systems keep cold beverages perfectly chilled while optimizing power consumption, keeping facility utility bills low.",
     },
   ];
 
@@ -59,13 +59,13 @@ export default function Features() {
         {/* Section Header */}
         <div className="max-w-[680px] mx-auto text-center mb-[46px]">
           <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-[#FFB877]">
-            Reliable technology
+            Reliable Vending Technology
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-white mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            State-of-the-art machines that just work
+            High-Performance Vending Machines Utah
           </h2>
           <p className="font-sans text-[#B9C6DA] text-[16.5px] leading-relaxed">
-            A vending machine is only as good as its ability to deliver your product. Ours are built to solve the everyday frustrations.
+            We supply high-efficiency snack, beverage, and healthy vending machines engineered to deliver unmatched reliability for offices, manufacturing warehouses, and gyms.
           </p>
         </div>
 

@@ -49,10 +49,10 @@ export default function ServiceArea() {
         {/* Header */}
         <div className="max-w-[680px] mx-auto mb-0 text-center">
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            Serving Salt Lake City &amp; beyond
+            Local Vending Machine Company Serving Utah
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            We provide vending services across Salt Lake City and statewide Utah. Not sure if we reach you? Just ask.
+            We provide reliable commercial vending machine services across the Wasatch Front and statewide—serving Salt Lake City, West Valley City, Sandy, Draper, Murray, South Jordan, Lehi, Provo, Orem, Ogden, and more.
           </p>
         </div>
 
