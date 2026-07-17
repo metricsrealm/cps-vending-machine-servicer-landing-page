@@ -1,0 +1,6 @@
+{
+  "name": "CPS Markets and Vending",
+  "description": "Full-service vending machines for Utah workplaces. We stock, service, and maintain snack and beverage vending machines across Salt Lake City and statewide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
