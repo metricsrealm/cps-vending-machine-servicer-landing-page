@@ -1,11 +1,11 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { submitLead } from "../lib/submitLead";
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
     companyName: "",
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "+1 ",
     subject: "",
@@ -15,6 +15,7 @@ export default function QuoteForm() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateStep = (currentStep: number) => {
@@ -24,11 +25,8 @@ export default function QuoteForm() {
         newErrors.companyName = "Company name is required";
       }
     } else if (currentStep === 2) {
-      if (!formData.firstName.trim()) {
-        newErrors.firstName = "First name is required";
-      }
-      if (!formData.lastName.trim()) {
-        newErrors.lastName = "Last name is required";
+      if (!formData.name.trim()) {
+        newErrors.name = "Name is required";
       }
       if (!formData.email.trim()) {
         newErrors.email = "Email is required";
@@ -71,7 +69,7 @@ export default function QuoteForm() {
     setStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (step < 3) {
       handleNext();
@@ -80,11 +78,25 @@ export default function QuoteForm() {
     if (!validateStep(3)) return;
 
     setIsSubmitting(true);
-    // Simulate server submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError("");
+    try {
+      await submitLead({
+        companyName: formData.companyName,
+        lookForNewService: formData.lookForNewService as "Yes" | "No",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.notes,
+      });
       setIsSuccess(true);
-    }, 1200);
+    } catch (err: unknown) {
+      console.error("Error submitting lead to Supabase:", err);
+      const errorMessage = err instanceof Error ? err.message : "Failed to submit quote request. Please try again.";
+      setSubmitError(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -216,41 +228,22 @@ export default function QuoteForm() {
                       transition={{ duration: 0.15 }}
                       className="space-y-[14px]"
                     >
-                      {/* First Name */}
+                      {/* Name */}
                       <div className="form-group text-left">
                         <input
                           type="text"
-                          id="firstName"
-                          name="firstName"
-                          value={formData.firstName}
+                          id="name"
+                          name="name"
+                          value={formData.name}
                           onChange={handleInputChange}
                           required
-                          placeholder="First Name"
+                          placeholder="Name"
                           className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
-                            errors.firstName ? "border-red-500" : "border-line"
+                            errors.name ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.firstName && (
-                          <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
-                        )}
-                      </div>
-
-                      {/* Last Name */}
-                      <div className="form-group text-left">
-                        <input
-                          type="text"
-                          id="lastName"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Last Name"
-                          className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
-                            errors.lastName ? "border-red-500" : "border-line"
-                          }`}
-                        />
-                        {errors.lastName && (
-                          <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+                        {errors.name && (
+                          <p className="text-red-500 text-xs mt-1">{errors.name}</p>
                         )}
                       </div>
 
@@ -337,6 +330,12 @@ export default function QuoteForm() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {submitError && (
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-[13px] text-left">
+                    {submitError}
+                  </div>
+                )}
 
                 {/* Navigation Buttons */}
                 <div className="flex gap-3 mt-6">

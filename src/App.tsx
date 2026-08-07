@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useEffect } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
@@ -15,8 +16,13 @@ import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import MobileCallBar from "./components/MobileCallBar";
+import { captureAttribution } from "./lib/attribution";
 
 export default function App() {
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col font-sans antialiased text-ink selection:bg-orange/20 selection:text-orange-dark bg-white">
       {/* Skip links for screen reader accessibility (WCAG 2.1) */}
