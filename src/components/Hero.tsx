@@ -1,6 +1,7 @@
 import { Check, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import QuoteForm from "./QuoteForm";
+import { trackPhoneClick } from "../lib/gtm";
 
 export default function Hero() {
   const ticks = [
@@ -24,7 +25,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-[48px] items-center py-20 md:py-[84px] lg:py-[96px] pb-24 md:pb-[104px]">
           {/* Left column: Text Content */}
           <motion.div 
-            className="lg:col-span-7 text-white text-left max-w-[560px]"
+            className="lg:col-span-7 text-white text-left max-w-[620px]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -41,18 +42,18 @@ export default function Hero() {
             </h1>
 
             {/* Subheading */}
-            <p className="text-[18px] text-[#D5DEEC] font-normal leading-relaxed mb-[26px] max-w-[500px]">
-              We handle complete workplace vending solutions at zero cost to you—including free installation, modern restocking, and 24/7 maintenance.
+            <p className="text-[18px] text-[#D5DEEC] font-normal leading-relaxed mb-[26px] max-w-[520px]">
+              We handle your workplace vending from installation to restocking and maintenance with no upfront cost to your business.
             </p>
 
             {/* Core USP Ticks */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[22px] gap-y-3 mb-[30px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[18px] gap-y-3 mb-[30px]">
               {ticks.map((tick, idx) => (
-                <div key={idx} className="flex items-start gap-[9px] text-[14.5px] font-medium text-[#EAF0F8]">
+                <div key={idx} className="flex items-start gap-[8px] text-[14px] sm:text-[14.5px] font-medium text-[#EAF0F8]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-[#4ADE80] mt-[2px] flex-shrink-0">
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
-                  <span>{tick}</span>
+                  <span className="sm:whitespace-nowrap">{tick}</span>
                 </div>
               ))}
             </div>
@@ -68,7 +69,11 @@ export default function Hero() {
               <span className="text-[#B9C6DA] text-[14px] flex items-center gap-2">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 <span>or call </span>
-                <a href="tel:+13852084074" className="text-white font-display font-bold hover:text-orange underline transition-colors">
+                <a 
+                  href="tel:+13852084074" 
+                  onClick={() => trackPhoneClick("Hero", "(385) 208-4074")}
+                  className="text-white font-display font-bold hover:text-orange underline transition-colors"
+                >
                   (385) 208-4074
                 </a>
               </span>

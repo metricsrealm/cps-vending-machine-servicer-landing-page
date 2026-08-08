@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackPhoneClick } from "../lib/gtm";
 
 export default function Footer() {
   const [logoFailed, setLogoFailed] = useState(false);
@@ -42,6 +43,7 @@ export default function Footer() {
             <div className="foot-info flex flex-col gap-[14px] font-sans text-[14px]">
               <a 
                 href="tel:+13852084074" 
+                onClick={() => trackPhoneClick("Footer", "(385) 208-4074")}
                 className="foot-info-item flex gap-2.5 items-start text-[#8393A8] hover:text-white transition-colors duration-150"
                 aria-label="Call (385) 208-4074"
               >

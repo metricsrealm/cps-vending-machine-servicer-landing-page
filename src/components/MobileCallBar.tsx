@@ -1,3 +1,5 @@
+import { trackPhoneClick } from "../lib/gtm";
+
 export default function MobileCallBar() {
   return (
     <div 
@@ -6,6 +8,7 @@ export default function MobileCallBar() {
     >
       <a 
         href="tel:+13852084074" 
+        onClick={() => trackPhoneClick("MobileCallBar", "(385) 208-4074")}
         className="flex-1 inline-flex items-center justify-center gap-2 font-display font-extrabold text-white bg-navy active:bg-navy-light py-[12.5px] px-4 rounded-xl text-[14.5px] transition-colors focus:outline-none"
       >
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange">

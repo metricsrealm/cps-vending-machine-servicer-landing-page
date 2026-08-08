@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { useState } from "react";
+import { trackPhoneClick } from "../lib/gtm";
 
 export default function Header() {
   const [logoFailed, setLogoFailed] = useState(false);
@@ -38,6 +39,7 @@ export default function Header() {
           {/* Phone Link */}
           <a 
             href="tel:+13852084074" 
+            onClick={() => trackPhoneClick("Header", "(385) 208-4074")}
             className="flex items-center gap-2 text-white hover:text-orange transition-colors group focus:outline-none focus:ring-2 focus:ring-orange/50 rounded-lg p-1"
             aria-label="Call CPS Markets and Vending at (385) 208-4074"
           >

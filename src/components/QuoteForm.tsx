@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { submitLead } from "../lib/submitLead";
+import { trackLeadSubmission } from "../lib/gtm";
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
@@ -89,6 +90,18 @@ export default function QuoteForm() {
         subject: formData.subject,
         message: formData.notes,
       });
+
+      // Fire GTM Data Layer event with enhanced conversion payload
+      trackLeadSubmission({
+        companyName: formData.companyName,
+        lookForNewService: formData.lookForNewService,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        notes: formData.notes,
+      });
+
       setIsSuccess(true);
     } catch (err: unknown) {
       console.error("Error submitting lead to Supabase:", err);
