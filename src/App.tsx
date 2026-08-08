@@ -3,20 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
 import Advantages from "./components/Advantages";
-import Features from "./components/Features";
-import HowItWorks from "./components/HowItWorks";
-import Reviews from "./components/Reviews";
-import ServiceArea from "./components/ServiceArea";
-import FAQ from "./components/FAQ";
-import FinalCTA from "./components/FinalCTA";
-import Footer from "./components/Footer";
 import MobileCallBar from "./components/MobileCallBar";
 import { captureAttribution } from "./lib/attribution";
+
+const Features = lazy(() => import("./components/Features"));
+const HowItWorks = lazy(() => import("./components/HowItWorks"));
+const Reviews = lazy(() => import("./components/Reviews"));
+const ServiceArea = lazy(() => import("./components/ServiceArea"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const FinalCTA = lazy(() => import("./components/FinalCTA"));
+const Footer = lazy(() => import("./components/Footer"));
 
 export default function App() {
   useEffect(() => {
@@ -40,15 +41,19 @@ export default function App() {
         <Hero />
         <TrustBar />
         <Advantages />
-        <Features />
-        <HowItWorks />
-        <Reviews />
-        <ServiceArea />
-        <FAQ />
-        <FinalCTA />
+        <Suspense fallback={null}>
+          <Features />
+          <HowItWorks />
+          <Reviews />
+          <ServiceArea />
+          <FAQ />
+          <FinalCTA />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
       {/* Mobile-only Sticky bar for prompt telephone/quote access */}
       <MobileCallBar />

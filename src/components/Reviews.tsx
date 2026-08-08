@@ -75,7 +75,7 @@ export default function Reviews() {
       }
     };
     handleResize();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -160,6 +160,10 @@ export default function Reviews() {
                       <img 
                         src={rev.avatar} 
                         alt={rev.name}
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        decoding="async"
                         className="w-[40px] h-[40px] rounded-full object-cover flex-shrink-0 border border-slate-100 shadow-sm"
                         referrerPolicy="no-referrer"
                         onError={() => setImgErrors(prev => ({ ...prev, [rev.originalIndex]: true }))}

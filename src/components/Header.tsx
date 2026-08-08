@@ -18,6 +18,10 @@ export default function Header() {
             <img 
               src="https://cpsmarketsandvending.com/wp-content/uploads/2025/07/new-logo.png" 
               alt="CPS Markets and Vending logo" 
+              width="200"
+              height="52"
+              fetchPriority="high"
+              decoding="async"
               className="h-[52px] w-auto object-contain brightness-0 invert transition-all duration-200"
               referrerPolicy="no-referrer"
               onError={() => setLogoFailed(true)}
