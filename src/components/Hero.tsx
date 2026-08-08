@@ -16,7 +16,7 @@ export default function Hero() {
       className="relative overflow-hidden bg-[#0B2A5B]" 
       id="hero-section"
       style={{
-        background: `linear-gradient(90deg, rgba(8,26,55,.94) 0%, rgba(8,26,55,.82) 45%, rgba(8,26,55,.55) 100%), url('https://cpsmarketsandvending.com/wp-content/uploads/2025/09/IMG_4257.jpg')`,
+        background: `linear-gradient(90deg, rgba(8,26,55,.94) 0%, rgba(8,26,55,.82) 45%, rgba(8,26,55,.55) 100%), url('/IMG_4257.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
