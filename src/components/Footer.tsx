@@ -17,7 +17,6 @@ export default function Footer() {
                   alt="CPS Markets and Vending logo" 
                   width="138"
                   height="36"
-                  loading="lazy"
                   decoding="async"
                   className="h-[36px] w-auto object-contain brightness-0 invert transition-all duration-200"
                   referrerPolicy="no-referrer"
