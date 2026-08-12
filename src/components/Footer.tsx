@@ -83,6 +83,11 @@ export default function Footer() {
             </h4>
             <ul className="foot-links font-sans flex flex-col gap-3">
               <li>
+                <a href="/vending-repair-maintenance/" className="hover:text-white transition-colors duration-150">
+                  Vending Repair &amp; Maintenance
+                </a>
+              </li>
+              <li>
                 <a href="#" className="hover:text-white transition-colors duration-150">
                   Privacy Policy
                 </a>
