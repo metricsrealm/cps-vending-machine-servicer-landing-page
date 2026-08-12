@@ -1,18 +1,21 @@
 import { useState, ChangeEvent, FormEvent, KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { submitLead } from "../lib/submitLead";
-import { trackLeadSubmission } from "../lib/gtm";
+import { submitRepairLead } from "../../lib/submitRepairLead";
+import { trackLeadSubmission, trackPhoneClick } from "../../lib/gtm";
 
-export default function QuoteForm() {
+export default function RepairQuoteForm() {
   const [formData, setFormData] = useState({
-    companyName: "",
+    serviceType: "Vending machine repair",
+    issueDescription: "",
     name: "",
+    companyName: "",
     email: "",
     phone: "+1 ",
-    subject: "",
-    lookForNewService: "Yes",
-    notes: "",
+    zipCode: "",
+    machineCount: "1",
+    machineBrandModel: "",
   });
+
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -22,8 +25,8 @@ export default function QuoteForm() {
   const validateStep = (currentStep: number) => {
     const newErrors: Record<string, string> = {};
     if (currentStep === 1) {
-      if (!formData.companyName.trim()) {
-        newErrors.companyName = "Company name is required";
+      if (!formData.serviceType) {
+        newErrors.serviceType = "Please select what you need help with";
       }
     } else if (currentStep === 2) {
       if (!formData.name.trim()) {
@@ -39,19 +42,19 @@ export default function QuoteForm() {
       } else if (!/^[+]?[0-9\s\-()]{7,15}$/.test(formData.phone.replace(/\s+/g, ""))) {
         newErrors.phone = "Please enter a valid phone number";
       }
-    } else if (currentStep === 3) {
-      if (!formData.subject.trim()) {
-        newErrors.subject = "Subject is required";
-      }
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     let { name, value } = e.target;
     if (name === "phone") {
       value = value.replace(/[^0-9+\s\-()]/g, "");
+    } else if (name === "zipCode") {
+      value = value.replace(/[^0-9-]/g, "");
     }
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
@@ -96,44 +99,59 @@ export default function QuoteForm() {
       handleNext();
       return;
     }
+
     if (!validateStep(3)) return;
 
     setIsSubmitting(true);
     setSubmitError("");
     try {
-      await submitLead({
-        companyName: formData.companyName,
-        lookForNewService: formData.lookForNewService as "Yes" | "No",
+      await submitRepairLead({
+        serviceType: formData.serviceType,
+        issueDescription: formData.issueDescription,
         name: formData.name,
+        companyName: formData.companyName,
         email: formData.email,
         phone: formData.phone,
-        subject: formData.subject,
-        message: formData.notes,
+        zipCode: formData.zipCode,
+        machineCount: formData.machineCount,
+        machineBrandModel: formData.machineBrandModel,
       });
 
-      // Fire GTM Data Layer event with enhanced conversion payload
+      // Fire GTM Data Layer event with conversion payload
       trackLeadSubmission({
-        companyName: formData.companyName,
-        lookForNewService: formData.lookForNewService,
+        companyName: formData.companyName || "",
+        lookForNewService: "Repair Request",
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        subject: formData.subject,
-        notes: formData.notes,
+        subject: formData.serviceType,
+        notes: formData.issueDescription,
       });
 
       setIsSuccess(true);
     } catch (err: unknown) {
-      console.error("Error submitting lead to Supabase:", err);
-      const errorMessage = err instanceof Error ? err.message : "Failed to submit quote request. Please try again.";
+      console.error("Error submitting repair lead to Supabase:", err);
+      const errorMessage =
+        err instanceof Error
+          ? err.message
+          : "Failed to submit service request. Please try again.";
       setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const serviceOptions = [
+    "Vending machine repair",
+    "Machine maintenance",
+    "Machine not working",
+    "Payment / card issue",
+    "Stocking / service issue",
+    "Other",
+  ];
+
   return (
-    <div 
+    <div
       className="bg-white border border-line rounded-[18px] p-6 sm:p-[30px] shadow-[0_12px_40px_rgba(8,26,55,0.08)] relative max-w-lg w-full mx-auto flex flex-col justify-between min-h-[380px] scroll-mt-24"
       id="quote"
     >
@@ -144,10 +162,14 @@ export default function QuoteForm() {
               {/* Header */}
               <div className="text-left mb-4">
                 <h3 className="font-display font-bold text-[19px] sm:text-[21px] text-navy mb-1" id="quote-title">
-                  Get a Free Quote
+                  {step === 1 && "Request Vending Machine Service"}
+                  {step === 2 && "How can we reach you?"}
+                  {step === 3 && "Tell us about the machine"}
                 </h3>
                 <p className="text-[#5B6472] text-[13px]">
-                  Tell us about your space — no obligation.
+                  {step === 1 && "Tell us a little about the machine and the issue. We'll help with the next step."}
+                  {step === 2 && "Please provide your contact details so we can assist you."}
+                  {step === 3 && "Additional machine details help us prepare for your service."}
                 </p>
               </div>
 
@@ -156,13 +178,13 @@ export default function QuoteForm() {
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-orange">Step {step} of 3</span>
                   <span className="text-[11.5px] font-semibold text-[#5B6472]">
-                    {step === 1 && "Space Details"}
-                    {step === 2 && "Contact Information"}
-                    {step === 3 && "Special Requests"}
+                    {step === 1 && "Request Type"}
+                    {step === 2 && "Contact Info"}
+                    {step === 3 && "Machine Details"}
                   </span>
                 </div>
                 <div className="w-full bg-[#EAF0F8] h-1.5 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className="bg-orange h-full"
                     initial={{ width: "33%" }}
                     animate={{ width: `${(step / 3) * 100}%` }}
@@ -180,74 +202,62 @@ export default function QuoteForm() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.15 }}
-                      className="space-y-[16px]"
+                      className="space-y-[14px]"
                     >
-                      {/* Company Name */}
+                      {/* What do you need help with? */}
                       <div className="form-group text-left">
-                        <input
-                          type="text"
-                          id="companyName"
-                          name="companyName"
-                          value={formData.companyName}
-                          onChange={handleInputChange}
-                          required
-                          placeholder="Company Name"
-                          className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
-                            errors.companyName ? "border-red-500" : "border-line"
-                          }`}
-                        />
-                        {errors.companyName && (
-                          <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
-                        )}
+                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]">
+                          What do you need help with?
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+                          {serviceOptions.map((option) => (
+                            <label
+                              key={option}
+                              className={`flex items-center gap-2 p-2.5 rounded-[10px] border text-[13.5px] font-semibold cursor-pointer transition-all ${
+                                formData.serviceType === option
+                                  ? "border-orange bg-[#FFF3E9] text-orange-dark shadow-sm"
+                                  : "border-line bg-white text-navy hover:border-slate-300"
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="serviceType"
+                                value={option}
+                                checked={formData.serviceType === option}
+                                onChange={handleInputChange}
+                                className="sr-only"
+                              />
+                              <div
+                                className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
+                                  formData.serviceType === option
+                                    ? "border-orange bg-orange"
+                                    : "border-slate-300"
+                                }`}
+                              >
+                                {formData.serviceType === option && (
+                                  <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                                )}
+                              </div>
+                              <span className="leading-tight">{option}</span>
+                            </label>
+                          ))}
+                        </div>
                       </div>
 
-                      {/* Look For New Service */}
-                      <div className="form-group text-left pt-2 pb-1">
-                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]">
-                          LOOK FOR A NEW SERVICE
+                      {/* Briefly describe the issue */}
+                      <div className="form-group text-left">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
+                          Briefly describe the issue <span className="text-slate-400 font-normal lowercase">(optional)</span>
                         </label>
-                        <div className="flex gap-[28px]">
-                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
-                            <input
-                              type="radio"
-                              name="lookForNewService"
-                              value="Yes"
-                              checked={formData.lookForNewService === "Yes"}
-                              onChange={handleInputChange}
-                              className="sr-only"
-                            />
-                            <div className={`relative w-[18px] h-[18px] rounded-full border-[1.5px] transition-all duration-200 ${
-                              formData.lookForNewService === "Yes"
-                                ? "border-[#E05A10] bg-white"
-                                : "border-slate-300 bg-white group-hover:border-slate-400"
-                            }`}>
-                              {formData.lookForNewService === "Yes" && (
-                                <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
-                              )}
-                            </div>
-                            <span>Yes</span>
-                          </label>
-                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
-                            <input
-                              type="radio"
-                              name="lookForNewService"
-                              value="No"
-                              checked={formData.lookForNewService === "No"}
-                              onChange={handleInputChange}
-                              className="sr-only"
-                            />
-                            <div className={`relative w-[18px] h-[18px] rounded-full border-[1.5px] transition-all duration-200 ${
-                              formData.lookForNewService === "No"
-                                ? "border-[#E05A10] bg-white"
-                                : "border-slate-300 bg-white group-hover:border-slate-400"
-                            }`}>
-                              {formData.lookForNewService === "No" && (
-                                <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
-                              )}
-                            </div>
-                            <span>No</span>
-                          </label>
-                        </div>
+                        <textarea
+                          id="issueDescription"
+                          name="issueDescription"
+                          rows={3}
+                          value={formData.issueDescription}
+                          onChange={handleInputChange}
+                          placeholder="What's happening with the machine?"
+                          className="w-full border-[1.5px] border-line rounded-[10px] px-[12px] py-[10px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 resize-none h-[80px]"
+                        />
                       </div>
                     </motion.div>
                   )}
@@ -259,7 +269,7 @@ export default function QuoteForm() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.15 }}
-                      className="space-y-[14px]"
+                      className="space-y-[13px]"
                     >
                       {/* Name */}
                       <div className="form-group text-left">
@@ -270,33 +280,25 @@ export default function QuoteForm() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          placeholder="Name"
+                          placeholder="Name *"
                           className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
                             errors.name ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.name && (
-                          <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-                        )}
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                       </div>
 
-                      {/* Email */}
+                      {/* Company */}
                       <div className="form-group text-left">
                         <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
+                          type="text"
+                          id="companyName"
+                          name="companyName"
+                          value={formData.companyName}
                           onChange={handleInputChange}
-                          required
-                          placeholder="Email"
-                          className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
-                            errors.email ? "border-red-500" : "border-line"
-                          }`}
+                          placeholder="Company (optional)"
+                          className="w-full border-[1.5px] border-line rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12"
                         />
-                        {errors.email && (
-                          <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                        )}
                       </div>
 
                       {/* Phone */}
@@ -309,14 +311,29 @@ export default function QuoteForm() {
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          placeholder="Phone"
+                          placeholder="Phone *"
                           className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
                             errors.phone ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.phone && (
-                          <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                        )}
+                        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                      </div>
+
+                      {/* Email */}
+                      <div className="form-group text-left">
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          placeholder="Email *"
+                          className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
+                            errors.email ? "border-red-500" : "border-line"
+                          }`}
+                        />
+                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                       </div>
                     </motion.div>
                   )}
@@ -328,37 +345,67 @@ export default function QuoteForm() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
                       transition={{ duration: 0.15 }}
-                      className="space-y-[16px]"
+                      className="space-y-[14px]"
                     >
-                      {/* Subject */}
+                      {/* ZIP Code */}
                       <div className="form-group text-left">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
+                          ZIP Code <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                        </label>
                         <input
                           type="text"
-                          id="subject"
-                          name="subject"
-                          value={formData.subject}
+                          inputMode="numeric"
+                          id="zipCode"
+                          name="zipCode"
+                          value={formData.zipCode}
                           onChange={handleInputChange}
-                          required
-                          placeholder="Subject"
-                          className={`w-full border-[1.5px] rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 ${
-                            errors.subject ? "border-red-500" : "border-line"
-                          }`}
+                          placeholder="ZIP Code"
+                          className="w-full border-[1.5px] border-line rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12"
                         />
-                        {errors.subject && (
-                          <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
-                        )}
                       </div>
 
-                      {/* Comment/Message */}
+                      {/* Number of machines */}
                       <div className="form-group text-left">
-                        <textarea
-                          id="notes"
-                          name="notes"
-                          rows={4}
-                          value={formData.notes}
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
+                          Number of Machines
+                        </label>
+                        <div className="flex gap-3">
+                          {["1", "2–5", "6+"].map((countOption) => (
+                            <label
+                              key={countOption}
+                              className={`flex-1 text-center py-2.5 px-3 rounded-[10px] border text-[14px] font-bold cursor-pointer transition-all ${
+                                formData.machineCount === countOption
+                                  ? "border-orange bg-[#FFF3E9] text-orange-dark shadow-sm"
+                                  : "border-line bg-white text-navy hover:border-slate-300"
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="machineCount"
+                                value={countOption}
+                                checked={formData.machineCount === countOption}
+                                onChange={handleInputChange}
+                                className="sr-only"
+                              />
+                              <span>{countOption}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Machine brand / model */}
+                      <div className="form-group text-left">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
+                          Machine Brand / Model <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="machineBrandModel"
+                          name="machineBrandModel"
+                          value={formData.machineBrandModel}
                           onChange={handleInputChange}
-                          placeholder="Comment/Message"
-                          className="w-full border-[1.5px] border-line rounded-[10px] px-[12px] py-[11px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12 resize-none h-[120px]"
+                          placeholder="e.g. Crane, Dixie Narco, AMS, etc."
+                          className="w-full border-[1.5px] border-line rounded-[10px] px-[12px] py-[10.5px] text-[14.5px] font-sans text-navy outline-none bg-white transition duration-150 focus:border-orange focus:ring-3 focus:ring-orange/12"
                         />
                       </div>
                     </motion.div>
@@ -403,7 +450,7 @@ export default function QuoteForm() {
                       {isSubmitting ? (
                         <span>Submitting...</span>
                       ) : (
-                        <span>Get Free Quote ✓</span>
+                        <span>Request Vending Service →</span>
                       )}
                     </button>
                   )}
@@ -412,7 +459,7 @@ export default function QuoteForm() {
             </div>
 
             <p className="text-[10px] text-[#5B6472] text-center mt-4 leading-normal">
-              By submitting, you agree to be contacted about your request. We never share your data.
+              By submitting, you agree to be contacted about your service request. We never share your data.
             </p>
           </div>
         ) : (
@@ -427,22 +474,33 @@ export default function QuoteForm() {
               ✓
             </div>
             <h4 className="font-display font-bold text-[19px] text-navy mb-1.5">
-              Thanks — we've got it!
+              Request Received!
             </h4>
             <p className="text-[#5B6472] text-[13.5px] max-w-xs mx-auto leading-relaxed mb-5">
-              A member of our local Utah team will reach out shortly to discuss your custom vending solution.
+              Thanks! Your service request has been received. We'll be in touch soon.
             </p>
             <p className="font-bold text-[14px] text-navy mb-2">
-              Prefer to talk now?
+              Need immediate assistance?
             </p>
-            <a 
-              href="tel:+13852084074" 
+            <a
+              href="tel:+13852084074"
+              onClick={() => trackPhoneClick("RepairSuccess", "(385) 208-4074")}
               className="inline-flex items-center justify-center gap-2 font-display font-bold text-[14px] text-navy border border-line bg-white hover:border-navy px-5 py-3 rounded-[10px] transition-colors shadow-sm"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-orange"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>Call (385) 208-4074</span>
+              <span>Call CPS: (385) 208-4074</span>
             </a>
           </motion.div>
         )}

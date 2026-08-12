@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import QuoteForm from "../QuoteForm";
+import RepairQuoteForm from "./RepairQuoteForm";
 import { trackPhoneClick } from "../../lib/gtm";
 
 export default function RepairHero() {
@@ -86,7 +86,7 @@ export default function RepairHero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           >
-            <QuoteForm />
+            <RepairQuoteForm />
           </motion.div>
         </div>
       </div>
