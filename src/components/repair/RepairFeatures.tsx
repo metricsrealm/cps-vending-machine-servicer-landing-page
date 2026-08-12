@@ -1,26 +1,26 @@
-import { Activity, CreditCard, MonitorCheck, ShieldAlert } from "lucide-react";
+import { Activity, BellRing, UserCheck, MonitorCheck } from "lucide-react";
 
 export default function RepairFeatures() {
   const features = [
     {
       icon: Activity,
-      title: "Real-Time Inventory & Telemetry",
-      desc: "Smart telemetry tracks inventory levels and machine operational status in real time, alerting our team to restock or maintenance needs.",
+      title: "Real-Time Machine Monitoring",
+      desc: "CPS utilizes telemetry and real-time visibility to monitor machine status, health, and inventory levels.",
     },
     {
-      icon: CreditCard,
-      title: "Cashless Payment Systems",
-      desc: "We service and maintain secure card readers supporting credit cards, debit cards, Apple Pay, Google Pay, and touchless mobile payments.",
+      icon: BellRing,
+      title: "Machine Alerts",
+      desc: "CPS can receive machine alerts for issues such as bill jams and temperature variances.",
+    },
+    {
+      icon: UserCheck,
+      title: "Proactive Service",
+      desc: "Machine information helps CPS identify service needs and dispatch technicians proactively.",
     },
     {
       icon: MonitorCheck,
-      title: "Modern Vending Equipment",
-      desc: "High-efficiency, climate-controlled vending units engineered for energy savings, quiet operation, and long-term mechanical reliability.",
-    },
-    {
-      icon: ShieldAlert,
-      title: "Guaranteed Product Delivery Sensors",
-      desc: "Infrared laser sensors detect whether a product drops correctly, preventing vending errors and protecting your employees' money.",
+      title: "Reliable Vending Equipment",
+      desc: "CPS uses modern vending equipment designed for dependable operation.",
     },
   ];
 
@@ -33,10 +33,10 @@ export default function RepairFeatures() {
             Smart Vending Technology
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            Modern Technology for Reliable Vending Machine Operations
+            Smart Technology for More Reliable Vending
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            CPS utilizes advanced monitoring systems and modern vending technology to maintain machine health and ensure consistent performance.
+            CPS uses modern vending technology and real-time machine data to support reliable operation, inventory management, and proactive service.
           </p>
         </div>
 

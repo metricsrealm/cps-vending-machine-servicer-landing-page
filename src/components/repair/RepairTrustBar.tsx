@@ -1,9 +1,9 @@
 export default function RepairTrustBar() {
   const highlights = [
-    { title: "Local Utah Service", sub: "Serving Utah businesses" },
-    { title: "Proactive Maintenance", sub: "Preventing machine downtime" },
-    { title: "Reliable Machine Support", sub: "Technical service & support" },
-    { title: "Full-Service Vending", sub: "End-to-end breakroom care" },
+    { title: "Local Utah Service", sub: "Serving Utah facilities" },
+    { title: "Vending Machine Repair", sub: "Commercial machine repair" },
+    { title: "Proactive Maintenance", sub: "Minimizing machine downtime" },
+    { title: "Ongoing Service", sub: "Technical support & maintenance" },
   ];
 
   return (

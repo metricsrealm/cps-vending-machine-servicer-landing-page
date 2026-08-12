@@ -11,6 +11,9 @@ export function useRepairSEO() {
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     const originalCanonical = canonicalLink?.getAttribute("href") || "";
 
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    const originalRobots = metaRobots?.getAttribute("content") || "";
+
     const jsonLdScript = document.querySelector('script[type="application/ld+json"]');
     const originalJsonLd = jsonLdScript?.textContent || "";
 
@@ -20,7 +23,7 @@ export function useRepairSEO() {
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Professional vending machine repair, preventive maintenance, and ongoing service for Utah businesses. Keeping your vending machines operating reliably across Salt Lake City and statewide."
+        "Professional vending machine repair, proactive maintenance, and ongoing service for Utah businesses. CPS Markets & Vending provides reliable service across Salt Lake City and statewide."
       );
     }
 
@@ -29,6 +32,10 @@ export function useRepairSEO() {
         "href",
         "https://vending.cpsmarketsandvending.com/vending-repair-maintenance/"
       );
+    }
+
+    if (metaRobots) {
+      metaRobots.setAttribute("content", "index, follow");
     }
 
     if (jsonLdScript) {

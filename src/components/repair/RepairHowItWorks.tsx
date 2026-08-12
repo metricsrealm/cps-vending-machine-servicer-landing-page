@@ -3,19 +3,19 @@ export default function RepairHowItWorks() {
     {
       num: 1,
       title: "Tell Us About Your Machine",
-      desc: "Contact us by phone or request form to share details about your vending machine issue, facility location, and service requirements.",
+      desc: "Explain your vending machine issue or service need by phone or online request form.",
       isHighlight: false,
     },
     {
       num: 2,
       title: "Service & Troubleshooting",
-      desc: "Our local Utah technicians review your equipment details and diagnose the necessary maintenance, repair, or service needs.",
+      desc: "CPS assesses the service need and provides appropriate support for your equipment.",
       isHighlight: true,
     },
     {
       num: 3,
       title: "Repair & Ongoing Maintenance",
-      desc: "We perform the service and establish a proactive maintenance schedule to ensure your vending machines continue operating reliably.",
+      desc: "CPS provides repair and maintenance intended to keep your vending machine operating reliably.",
       isHighlight: false,
     },
   ];
@@ -29,10 +29,10 @@ export default function RepairHowItWorks() {
             3-Step Service Process
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            How Our Vending Repair &amp; Service Works
+            How Our Vending Repair &amp; Maintenance Service Works
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            Getting professional repair and maintenance for your workplace vending machines is fast, straightforward, and hassle-free.
+            Getting professional repair and maintenance for your workplace vending machines is straightforward and hassle-free.
           </p>
         </div>
 

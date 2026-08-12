@@ -1,26 +1,26 @@
-import { Wrench, ShieldCheck, Cpu, RefreshCw } from "lucide-react";
+import { Wrench, ShieldCheck, WrenchIcon, Activity } from "lucide-react";
 
 export default function RepairAdvantages() {
   const cards = [
     {
       icon: Wrench,
       title: "Vending Machine Repair",
-      desc: "Prompt technical repair services to fix machine malfunctions, product delivery issues, and keep your workplace vending operational.",
+      desc: "CPS provides repair services to help keep vending machines functional and operating properly.",
     },
     {
       icon: ShieldCheck,
-      title: "Preventive Maintenance",
-      desc: "Proactive maintenance schedules designed to prevent equipment breakdowns, ensure component longevity, and maintain peak machine efficiency.",
+      title: "Proactive Maintenance",
+      desc: "CPS provides proactive maintenance designed to minimize downtime and keep machines operating reliably.",
     },
     {
-      icon: Cpu,
-      title: "Machine Troubleshooting & Support",
-      desc: "Expert service support to diagnose and resolve electrical, mechanical, or payment system issues on your workplace vending machines.",
+      icon: WrenchIcon,
+      title: "Vending Machine Service",
+      desc: "CPS provides ongoing service and support for business vending operations.",
     },
     {
-      icon: RefreshCw,
-      title: "Ongoing Vending Service",
-      desc: "Comprehensive restocking, cleaning, and routine service as part of full-service vending support for Utah facilities.",
+      icon: Activity,
+      title: "Machine Monitoring & Support",
+      desc: "CPS uses telemetry and real-time machine information to monitor operations and identify issues that may require service.",
     },
   ];
 
@@ -33,10 +33,10 @@ export default function RepairAdvantages() {
             Vending Repair &amp; Maintenance
           </span>
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            Professional Vending Service to Minimize Downtime
+            Professional Vending Machine Repair &amp; Maintenance
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            We help Utah businesses keep their vending equipment operating properly with technical repair, preventive maintenance, and ongoing service support.
+            CPS provides repair and proactive maintenance to help minimize downtime and keep vending machines functional.
           </p>
         </div>
 

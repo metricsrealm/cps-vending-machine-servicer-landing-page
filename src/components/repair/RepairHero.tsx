@@ -73,7 +73,7 @@ export default function RepairHero() {
                   onClick={() => trackPhoneClick("RepairHero", "(385) 208-4074")}
                   className="text-white font-display font-bold hover:text-orange underline transition-colors"
                 >
-                  (385) 208-4074
+                  Call CPS: (385) 208-4074
                 </a>
               </span>
             </div>

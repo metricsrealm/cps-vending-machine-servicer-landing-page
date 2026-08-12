@@ -7,32 +7,32 @@ export default function RepairFAQ() {
     {
       id: "faq-repair-1",
       question: "Does CPS provide vending machine repair in Utah?",
-      answer: "Yes. CPS provides professional vending machine repair, technical troubleshooting, and service to keep workplace vending equipment operating properly.",
+      answer: "Yes. CPS provides commercial vending machine repair, technical troubleshooting, and service for businesses across Utah to keep equipment operating properly.",
     },
     {
       id: "faq-repair-2",
-      question: "What is included in proactive vending machine maintenance?",
-      answer: "Our maintenance includes regular inspection, cleaning, component checks, telemetry monitoring, and ongoing technical support for your workplace vending machines.",
+      question: "Does CPS provide vending machine maintenance?",
+      answer: "Yes. CPS provides proactive vending machine maintenance designed to minimize downtime and keep vending machines functional.",
     },
     {
       id: "faq-repair-3",
-      question: "Which Utah cities do you service for vending repairs and maintenance?",
-      answer: "We service commercial facilities across Salt Lake City, West Valley City, West Jordan, Provo, Orem, Sandy, Ogden, Draper, Murray, South Jordan, Lehi, and statewide Utah.",
+      question: "How do I request vending machine repair or service?",
+      answer: "You can request service by calling CPS directly at (385) 208-4074 or by submitting our online request form. Our team will review your request and follow up promptly.",
     },
     {
       id: "faq-repair-4",
-      question: "How do I request vending machine repair or service?",
-      answer: "You can request service by calling us directly at (385) 208-4074 or by submitting our online request form. We will get in touch promptly to discuss your machine's needs.",
+      question: "Does CPS provide ongoing vending machine service?",
+      answer: "Yes. CPS provides ongoing vending machine service, restocking, cleaning, and routine maintenance for business breakrooms and workplace facilities throughout Utah.",
     },
     {
       id: "faq-repair-5",
-      question: "Does CPS offer telemetry and real-time inventory monitoring?",
-      answer: "Yes. We use built-in smart telemetry to monitor machine health, inventory levels, and system status in real time, helping prevent downtime before it occurs.",
+      question: "How does CPS monitor vending machines for service issues?",
+      answer: "CPS uses smart telemetry and real-time machine visibility to monitor inventory levels, operational status, and system performance to identify service needs.",
     },
     {
       id: "faq-repair-6",
-      question: "Do you service machines with cashless payment systems?",
-      answer: "Yes. We support and service modern vending equipment equipped with credit card readers, mobile pay (Apple Pay, Google Pay), and traditional cash payment systems.",
+      question: "Does CPS use real-time monitoring for vending machines?",
+      answer: "Yes. Real-time telemetry generates automated machine alerts for issues such as bill jams and temperature variances, allowing CPS to dispatch technicians proactively.",
     },
   ];
 

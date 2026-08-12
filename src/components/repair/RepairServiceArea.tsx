@@ -48,10 +48,10 @@ export default function RepairServiceArea() {
         {/* Header */}
         <div className="max-w-[680px] mx-auto mb-0 text-center">
           <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
-            Local Vending Machine Service in Utah
+            Local Vending Machine Repair &amp; Service in Utah
           </h2>
           <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
-            We provide reliable commercial vending machine repair and maintenance across the Wasatch Front and statewide—serving Salt Lake City, West Valley City, Sandy, Draper, Murray, South Jordan, Lehi, Provo, Orem, Ogden, and more.
+            CPS provides vending machine repair, maintenance, and ongoing service for businesses across its Utah service area.
           </p>
         </div>
 
