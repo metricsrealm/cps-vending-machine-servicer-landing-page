@@ -45,40 +45,41 @@ export default function Advantages() {
   ];
 
   return (
-    <section className="bg-white py-[78px]" id="why-cps-section">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <section className="bg-white py-[78px]" id="home-advantages-section">
+      <div className="max-w-[1200px] mx-auto px-6" id="home-advantages-container">
         {/* Section Header */}
-        <div className="max-w-[680px] mx-auto text-center mb-[46px]">
-          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange">
+        <div className="max-w-[680px] mx-auto text-center mb-[46px]" id="home-advantages-header">
+          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange" id="home-advantages-tagline">
             Utah's Vending Experts
           </span>
-          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
+          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]" id="home-advantages-heading">
             Professional Vending Machine Services for Utah Businesses
           </h2>
-          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
+          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed" id="home-advantages-description">
             We provide comprehensive, worry-free vending machine supplier services. From free machine placement to modern restocking and rapid repairs, we do it all.
           </p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] max-w-[960px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] max-w-[960px] mx-auto" id="home-advantages-grid">
           {cards.map((card, idx) => (
             <motion.div
               key={idx}
               className="bg-white border border-line rounded-[16px] p-[28px] shadow-sm hover:shadow-md transition-all duration-300 text-left"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.18 }}
+              id={`home-advantage-card-${idx + 1}`}
             >
               {/* Icon Wrapper */}
-              <div className="w-[48px] h-[48px] rounded-[12px] bg-[#FFF3E9] text-orange flex items-center justify-center mb-4">
+              <div className="w-[48px] h-[48px] rounded-[12px] bg-[#FFF3E9] text-orange flex items-center justify-center mb-4" id={`home-advantage-icon-${idx + 1}`}>
                 {card.svg}
               </div>
 
               {/* Text Details */}
-              <h3 className="font-display font-bold text-[19px] text-navy mb-2 leading-none">
+              <h3 className="font-display font-bold text-[19px] text-navy mb-2 leading-none" id={`home-advantage-title-${idx + 1}`}>
                 {card.title}
               </h3>
-              <p className="font-sans text-[#5B6472] text-[15px] leading-relaxed">
+              <p className="font-sans text-[#5B6472] text-[15px] leading-relaxed" id={`home-advantage-desc-${idx + 1}`}>
                 {card.desc}
               </p>
             </motion.div>

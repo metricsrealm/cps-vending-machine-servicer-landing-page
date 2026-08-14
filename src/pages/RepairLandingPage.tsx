@@ -16,10 +16,11 @@ export default function RepairLandingPage() {
   useRepairSEO();
 
   return (
-    <div className="min-h-screen flex flex-col font-sans antialiased text-ink selection:bg-orange/20 selection:text-orange-dark bg-white">
+    <div className="min-h-screen flex flex-col font-sans antialiased text-ink selection:bg-orange/20 selection:text-orange-dark bg-white" id="repair-page-root">
       {/* Skip links for accessibility */}
       <a 
         href="#quote-container" 
+        id="repair-skip-link"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-orange text-white px-4 py-2 rounded-lg font-bold z-[100] shadow-md outline-none"
       >
         Skip to Quote Form
@@ -28,7 +29,7 @@ export default function RepairLandingPage() {
       {/* Header */}
       <Header />
 
-      <main id="main-content">
+      <main id="repair-main-content">
         <RepairHero />
         <RepairTrustBar />
         <RepairAdvantages />

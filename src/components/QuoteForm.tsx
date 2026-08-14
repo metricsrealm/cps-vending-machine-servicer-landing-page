@@ -139,30 +139,31 @@ export default function QuoteForm() {
     >
       <AnimatePresence mode="wait">
         {!isSuccess ? (
-          <div className="flex flex-col h-full justify-between">
+          <div className="flex flex-col h-full justify-between" id="home-quote-form-container">
             <div>
               {/* Header */}
-              <div className="text-left mb-4">
+              <div className="text-left mb-4" id="home-quote-form-header">
                 <h3 className="font-display font-bold text-[19px] sm:text-[21px] text-navy mb-1" id="quote-title">
                   Get a Free Quote
                 </h3>
-                <p className="text-[#5B6472] text-[13px]">
+                <p className="text-[#5B6472] text-[13px]" id="home-quote-form-subtitle">
                   Tell us about your space — no obligation.
                 </p>
               </div>
 
               {/* Progress Tracker */}
-              <div className="mb-5">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-orange">Step {step} of 3</span>
-                  <span className="text-[11.5px] font-semibold text-[#5B6472]">
+              <div className="mb-5" id="home-quote-progress-tracker">
+                <div className="flex justify-between items-center mb-2" id="home-quote-progress-labels">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-orange" id="home-quote-step-count">Step {step} of 3</span>
+                  <span className="text-[11.5px] font-semibold text-[#5B6472]" id="home-quote-step-title">
                     {step === 1 && "Space Details"}
                     {step === 2 && "Contact Information"}
                     {step === 3 && "Special Requests"}
                   </span>
                 </div>
-                <div className="w-full bg-[#EAF0F8] h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-[#EAF0F8] h-1.5 rounded-full overflow-hidden" id="home-quote-progress-bar-bg">
                   <motion.div 
+                    id="home-quote-progress-bar-fill"
                     className="bg-orange h-full"
                     initial={{ width: "33%" }}
                     animate={{ width: `${(step / 3) * 100}%` }}
@@ -171,11 +172,12 @@ export default function QuoteForm() {
                 </div>
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} onKeyDown={handleKeyDown} noValidate>
+              <form id="home-quote-multi-step-form" onSubmit={(e) => e.preventDefault()} onKeyDown={handleKeyDown} noValidate>
                 <AnimatePresence mode="wait">
                   {step === 1 && (
                     <motion.div
                       key="step1"
+                      id="home-quote-step-1-wrap"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -183,7 +185,7 @@ export default function QuoteForm() {
                       className="space-y-[16px]"
                     >
                       {/* Company Name */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-company-group">
                         <input
                           type="text"
                           id="companyName"
@@ -197,19 +199,20 @@ export default function QuoteForm() {
                           }`}
                         />
                         {errors.companyName && (
-                          <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>
+                          <p className="text-red-500 text-xs mt-1" id="home-quote-company-error">{errors.companyName}</p>
                         )}
                       </div>
 
                       {/* Look For New Service */}
-                      <div className="form-group text-left pt-2 pb-1">
-                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]">
+                      <div className="form-group text-left pt-2 pb-1" id="home-quote-service-status-group">
+                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]" id="home-quote-service-status-label">
                           LOOK FOR A NEW SERVICE
                         </label>
-                        <div className="flex gap-[28px]">
-                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
+                        <div className="flex gap-[28px]" id="home-quote-service-radio-options">
+                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group" id="home-quote-radio-yes-label">
                             <input
                               type="radio"
+                              id="home-quote-radio-yes-input"
                               name="lookForNewService"
                               value="Yes"
                               checked={formData.lookForNewService === "Yes"}
@@ -225,11 +228,12 @@ export default function QuoteForm() {
                                 <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
                               )}
                             </div>
-                            <span>Yes</span>
+                            <span id="home-quote-radio-yes-text">Yes</span>
                           </label>
-                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group">
+                          <label className="flex items-center gap-[8px] cursor-pointer text-[14.5px] text-navy font-semibold select-none group" id="home-quote-radio-no-label">
                             <input
                               type="radio"
+                              id="home-quote-radio-no-input"
                               name="lookForNewService"
                               value="No"
                               checked={formData.lookForNewService === "No"}
@@ -245,7 +249,7 @@ export default function QuoteForm() {
                                 <div className="absolute inset-0 m-auto w-[10px] h-[10px] rounded-full bg-[#E05A10]" />
                               )}
                             </div>
-                            <span>No</span>
+                            <span id="home-quote-radio-no-text">No</span>
                           </label>
                         </div>
                       </div>
@@ -255,6 +259,7 @@ export default function QuoteForm() {
                   {step === 2 && (
                     <motion.div
                       key="step2"
+                      id="home-quote-step-2-wrap"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -262,7 +267,7 @@ export default function QuoteForm() {
                       className="space-y-[14px]"
                     >
                       {/* Name */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-name-group">
                         <input
                           type="text"
                           id="name"
@@ -276,12 +281,12 @@ export default function QuoteForm() {
                           }`}
                         />
                         {errors.name && (
-                          <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                          <p className="text-red-500 text-xs mt-1" id="home-quote-name-error">{errors.name}</p>
                         )}
                       </div>
 
                       {/* Email */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-email-group">
                         <input
                           type="email"
                           id="email"
@@ -295,12 +300,12 @@ export default function QuoteForm() {
                           }`}
                         />
                         {errors.email && (
-                          <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                          <p className="text-red-500 text-xs mt-1" id="home-quote-email-error">{errors.email}</p>
                         )}
                       </div>
 
                       {/* Phone */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-phone-group">
                         <input
                           type="tel"
                           inputMode="tel"
@@ -315,7 +320,7 @@ export default function QuoteForm() {
                           }`}
                         />
                         {errors.phone && (
-                          <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                          <p className="text-red-500 text-xs mt-1" id="home-quote-phone-error">{errors.phone}</p>
                         )}
                       </div>
                     </motion.div>
@@ -324,6 +329,7 @@ export default function QuoteForm() {
                   {step === 3 && (
                     <motion.div
                       key="step3"
+                      id="home-quote-step-3-wrap"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -331,7 +337,7 @@ export default function QuoteForm() {
                       className="space-y-[16px]"
                     >
                       {/* Subject */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-subject-group">
                         <input
                           type="text"
                           id="subject"
@@ -345,12 +351,12 @@ export default function QuoteForm() {
                           }`}
                         />
                         {errors.subject && (
-                          <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
+                          <p className="text-red-500 text-xs mt-1" id="home-quote-subject-error">{errors.subject}</p>
                         )}
                       </div>
 
                       {/* Comment/Message */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="home-quote-notes-group">
                         <textarea
                           id="notes"
                           name="notes"
@@ -366,18 +372,19 @@ export default function QuoteForm() {
                 </AnimatePresence>
 
                 {submitError && (
-                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-[13px] text-left">
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-[13px] text-left" id="home-quote-submit-error-box">
                     {submitError}
                   </div>
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex gap-3 mt-6 items-center">
+                <div className="flex gap-3 mt-6 items-center" id="home-quote-button-group">
                   {step > 1 && (
                     <button
                       key="btn-back"
                       type="button"
                       onClick={handleBack}
+                      id="home-quote-back-btn"
                       className="px-6 py-[12px] text-[14px] font-display font-bold text-navy border border-line hover:bg-slate-50 rounded-[10px] transition-all cursor-pointer flex items-center justify-center gap-1.5 focus:outline-none whitespace-nowrap flex-none"
                     >
                       ← Back
@@ -388,6 +395,7 @@ export default function QuoteForm() {
                       key="btn-continue"
                       type="button"
                       onClick={handleNext}
+                      id="home-quote-continue-btn"
                       className="flex-1 py-[12px] px-4 text-[14px] font-display font-bold text-white bg-orange hover:bg-orange-dark rounded-[10px] shadow-sm shadow-orange/12 transition-all cursor-pointer flex items-center justify-center gap-1.5 focus:outline-none whitespace-nowrap"
                     >
                       Continue →
@@ -398,12 +406,13 @@ export default function QuoteForm() {
                       type="button"
                       onClick={handleFinalSubmit}
                       disabled={isSubmitting}
+                      id="home-quote-submit-btn"
                       className="flex-1 py-[12px] px-4 text-[13px] sm:text-[14px] font-display font-bold text-white bg-orange hover:bg-orange-dark rounded-[10px] shadow-sm shadow-orange/12 transition-all cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-85 focus:outline-none whitespace-nowrap"
                     >
                       {isSubmitting ? (
-                        <span>Submitting...</span>
+                        <span id="home-quote-submitting-text">Submitting...</span>
                       ) : (
-                        <span>Get Free Quote ✓</span>
+                        <span id="home-quote-submit-text">Get Free Quote ✓</span>
                       )}
                     </button>
                   )}
@@ -411,38 +420,40 @@ export default function QuoteForm() {
               </form>
             </div>
 
-            <p className="text-[10px] text-[#5B6472] text-center mt-4 leading-normal">
+            <p className="text-[10px] text-[#5B6472] text-center mt-4 leading-normal" id="home-quote-privacy-note">
               By submitting, you agree to be contacted about your request. We never share your data.
             </p>
           </div>
         ) : (
           <motion.div
             key="success"
+            id="home-quote-success-view"
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="text-center py-4 flex flex-col justify-center items-center h-full min-h-[320px]"
           >
-            <div className="w-[44px] h-[44px] rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3 border border-emerald-100 font-bold text-[18px]">
+            <div className="w-[44px] h-[44px] rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3 border border-emerald-100 font-bold text-[18px]" id="home-quote-success-badge">
               ✓
             </div>
-            <h4 className="font-display font-bold text-[19px] text-navy mb-1.5">
+            <h4 className="font-display font-bold text-[19px] text-navy mb-1.5" id="home-quote-success-heading">
               Thanks — we've got it!
             </h4>
-            <p className="text-[#5B6472] text-[13.5px] max-w-xs mx-auto leading-relaxed mb-5">
+            <p className="text-[#5B6472] text-[13.5px] max-w-xs mx-auto leading-relaxed mb-5" id="home-quote-success-description">
               A member of our local Utah team will reach out shortly to discuss your custom vending solution.
             </p>
-            <p className="font-bold text-[14px] text-navy mb-2">
+            <p className="font-bold text-[14px] text-navy mb-2" id="home-quote-success-call-prompt">
               Prefer to talk now?
             </p>
             <a 
               href="tel:+13852084074" 
+              id="home-quote-success-phone-btn"
               className="inline-flex items-center justify-center gap-2 font-display font-bold text-[14px] text-navy border border-line bg-white hover:border-navy px-5 py-3 rounded-[10px] transition-colors shadow-sm"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-orange" id="home-quote-success-phone-icon">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
-              <span>Call (385) 208-4074</span>
+              <span id="home-quote-success-phone-text">Call (385) 208-4074</span>
             </a>
           </motion.div>
         )}

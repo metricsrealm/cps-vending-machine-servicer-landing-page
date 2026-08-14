@@ -15,10 +15,11 @@ const Footer = lazy(() => import("../components/Footer"));
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col font-sans antialiased text-ink selection:bg-orange/20 selection:text-orange-dark bg-white">
+    <div className="min-h-screen flex flex-col font-sans antialiased text-ink selection:bg-orange/20 selection:text-orange-dark bg-white" id="home-page-root">
       {/* Skip links for screen reader accessibility (WCAG 2.1) */}
       <a 
         href="#quote-container" 
+        id="home-skip-link"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-orange text-white px-4 py-2 rounded-lg font-bold z-[100] shadow-md outline-none"
       >
         Skip to Quote Form
@@ -27,7 +28,7 @@ export default function HomePage() {
       {/* Primary Landing Sections */}
       <Header />
       
-      <main id="main-content">
+      <main id="home-main-content">
         <Hero />
         <TrustBar />
         <Advantages />

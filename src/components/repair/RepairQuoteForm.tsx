@@ -157,16 +157,16 @@ export default function RepairQuoteForm() {
     >
       <AnimatePresence mode="wait">
         {!isSuccess ? (
-          <div className="flex flex-col h-full justify-between">
-            <div>
+          <div className="flex flex-col h-full justify-between" id="repair-quote-form-wrap">
+            <div id="repair-quote-form-body">
               {/* Header */}
-              <div className="text-left mb-4">
-                <h3 className="font-display font-bold text-[19px] sm:text-[21px] text-navy mb-1" id="quote-title">
+              <div className="text-left mb-4" id="repair-quote-header">
+                <h3 className="font-display font-bold text-[19px] sm:text-[21px] text-navy mb-1" id="repair-quote-title">
                   {step === 1 && "Request Vending Machine Service"}
                   {step === 2 && "How can we reach you?"}
                   {step === 3 && "Tell us about the machine"}
                 </h3>
-                <p className="text-[#5B6472] text-[13px]">
+                <p className="text-[#5B6472] text-[13px]" id="repair-quote-subtitle">
                   {step === 1 && "Tell us a little about the machine and the issue. We'll help with the next step."}
                   {step === 2 && "Please provide your contact details so we can assist you."}
                   {step === 3 && "Additional machine details help us prepare for your service."}
@@ -174,17 +174,18 @@ export default function RepairQuoteForm() {
               </div>
 
               {/* Progress Tracker */}
-              <div className="mb-5">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-orange">Step {step} of 3</span>
-                  <span className="text-[11.5px] font-semibold text-[#5B6472]">
+              <div className="mb-5" id="repair-quote-progress-wrap">
+                <div className="flex justify-between items-center mb-2" id="repair-quote-progress-header">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-orange" id="repair-quote-progress-label">Step {step} of 3</span>
+                  <span className="text-[11.5px] font-semibold text-[#5B6472]" id="repair-quote-progress-step-name">
                     {step === 1 && "Request Type"}
                     {step === 2 && "Contact Info"}
                     {step === 3 && "Machine Details"}
                   </span>
                 </div>
-                <div className="w-full bg-[#EAF0F8] h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-[#EAF0F8] h-1.5 rounded-full overflow-hidden" id="repair-quote-progress-bar-track">
                   <motion.div
+                    id="repair-quote-progress-bar-fill"
                     className="bg-orange h-full"
                     initial={{ width: "33%" }}
                     animate={{ width: `${(step / 3) * 100}%` }}
@@ -193,11 +194,12 @@ export default function RepairQuoteForm() {
                 </div>
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} onKeyDown={handleKeyDown} noValidate>
+              <form id="repair-quote-form" onSubmit={(e) => e.preventDefault()} onKeyDown={handleKeyDown} noValidate>
                 <AnimatePresence mode="wait">
                   {step === 1 && (
                     <motion.div
                       key="step1"
+                      id="repair-quote-step-1"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -205,14 +207,15 @@ export default function RepairQuoteForm() {
                       className="space-y-[14px]"
                     >
                       {/* What do you need help with? */}
-                      <div className="form-group text-left">
-                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]">
+                      <div className="form-group text-left" id="repair-quote-service-type-group">
+                        <label className="block text-[13px] font-bold text-navy mb-2.5 uppercase tracking-[0.03em]" id="repair-quote-service-type-label">
                           What do you need help with?
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-                          {serviceOptions.map((option) => (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3" id="repair-quote-service-options-grid">
+                          {serviceOptions.map((option, idx) => (
                             <label
                               key={option}
+                              id={`repair-quote-service-option-label-${idx + 1}`}
                               className={`flex items-center gap-2 p-2.5 rounded-[10px] border text-[13.5px] font-semibold cursor-pointer transition-all ${
                                 formData.serviceType === option
                                   ? "border-orange bg-[#FFF3E9] text-orange-dark shadow-sm"
@@ -221,6 +224,7 @@ export default function RepairQuoteForm() {
                             >
                               <input
                                 type="radio"
+                                id={`repair-quote-service-radio-${idx + 1}`}
                                 name="serviceType"
                                 value={option}
                                 checked={formData.serviceType === option}
@@ -228,6 +232,7 @@ export default function RepairQuoteForm() {
                                 className="sr-only"
                               />
                               <div
+                                id={`repair-quote-service-indicator-${idx + 1}`}
                                 className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${
                                   formData.serviceType === option
                                     ? "border-orange bg-orange"
@@ -235,22 +240,22 @@ export default function RepairQuoteForm() {
                                 }`}
                               >
                                 {formData.serviceType === option && (
-                                  <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-white" id={`repair-quote-service-indicator-dot-${idx + 1}`} />
                                 )}
                               </div>
-                              <span className="leading-tight">{option}</span>
+                              <span className="leading-tight" id={`repair-quote-service-text-${idx + 1}`}>{option}</span>
                             </label>
                           ))}
                         </div>
                       </div>
 
                       {/* Briefly describe the issue */}
-                      <div className="form-group text-left">
-                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
-                          Briefly describe the issue <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                      <div className="form-group text-left" id="repair-quote-issue-desc-group">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]" id="repair-quote-issue-desc-label">
+                          Briefly describe the issue <span className="text-slate-400 font-normal lowercase" id="repair-quote-issue-desc-optional">(optional)</span>
                         </label>
                         <textarea
-                          id="issueDescription"
+                          id="repair-quote-issueDescription"
                           name="issueDescription"
                           rows={3}
                           value={formData.issueDescription}
@@ -265,6 +270,7 @@ export default function RepairQuoteForm() {
                   {step === 2 && (
                     <motion.div
                       key="step2"
+                      id="repair-quote-step-2"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -272,10 +278,10 @@ export default function RepairQuoteForm() {
                       className="space-y-[13px]"
                     >
                       {/* Name */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="repair-quote-name-group">
                         <input
                           type="text"
-                          id="name"
+                          id="repair-quote-name"
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
@@ -285,14 +291,14 @@ export default function RepairQuoteForm() {
                             errors.name ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                        {errors.name && <p className="text-red-500 text-xs mt-1" id="repair-quote-name-error">{errors.name}</p>}
                       </div>
 
                       {/* Company */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="repair-quote-company-group">
                         <input
                           type="text"
-                          id="companyName"
+                          id="repair-quote-companyName"
                           name="companyName"
                           value={formData.companyName}
                           onChange={handleInputChange}
@@ -302,11 +308,11 @@ export default function RepairQuoteForm() {
                       </div>
 
                       {/* Phone */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="repair-quote-phone-group">
                         <input
                           type="tel"
                           inputMode="tel"
-                          id="phone"
+                          id="repair-quote-phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
@@ -316,14 +322,14 @@ export default function RepairQuoteForm() {
                             errors.phone ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                        {errors.phone && <p className="text-red-500 text-xs mt-1" id="repair-quote-phone-error">{errors.phone}</p>}
                       </div>
 
                       {/* Email */}
-                      <div className="form-group text-left">
+                      <div className="form-group text-left" id="repair-quote-email-group">
                         <input
                           type="email"
-                          id="email"
+                          id="repair-quote-email"
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
@@ -333,7 +339,7 @@ export default function RepairQuoteForm() {
                             errors.email ? "border-red-500" : "border-line"
                           }`}
                         />
-                        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                        {errors.email && <p className="text-red-500 text-xs mt-1" id="repair-quote-email-error">{errors.email}</p>}
                       </div>
                     </motion.div>
                   )}
@@ -341,6 +347,7 @@ export default function RepairQuoteForm() {
                   {step === 3 && (
                     <motion.div
                       key="step3"
+                      id="repair-quote-step-3"
                       initial={{ opacity: 0, x: 8 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -8 }}
@@ -348,14 +355,14 @@ export default function RepairQuoteForm() {
                       className="space-y-[14px]"
                     >
                       {/* ZIP Code */}
-                      <div className="form-group text-left">
-                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
-                          ZIP Code <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                      <div className="form-group text-left" id="repair-quote-zip-group">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]" id="repair-quote-zip-label">
+                          ZIP Code <span className="text-slate-400 font-normal lowercase" id="repair-quote-zip-optional">(optional)</span>
                         </label>
                         <input
                           type="text"
                           inputMode="numeric"
-                          id="zipCode"
+                          id="repair-quote-zipCode"
                           name="zipCode"
                           value={formData.zipCode}
                           onChange={handleInputChange}
@@ -365,14 +372,15 @@ export default function RepairQuoteForm() {
                       </div>
 
                       {/* Number of machines */}
-                      <div className="form-group text-left">
-                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
+                      <div className="form-group text-left" id="repair-quote-machine-count-group">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]" id="repair-quote-machine-count-label">
                           Number of Machines
                         </label>
-                        <div className="flex gap-3">
-                          {["1", "2–5", "6+"].map((countOption) => (
+                        <div className="flex gap-3" id="repair-quote-machine-count-options">
+                          {["1", "2–5", "6+"].map((countOption, idx) => (
                             <label
                               key={countOption}
+                              id={`repair-quote-machine-count-label-${idx + 1}`}
                               className={`flex-1 text-center py-2.5 px-3 rounded-[10px] border text-[14px] font-bold cursor-pointer transition-all ${
                                 formData.machineCount === countOption
                                   ? "border-orange bg-[#FFF3E9] text-orange-dark shadow-sm"
@@ -381,26 +389,27 @@ export default function RepairQuoteForm() {
                             >
                               <input
                                 type="radio"
+                                id={`repair-quote-machine-count-radio-${idx + 1}`}
                                 name="machineCount"
                                 value={countOption}
                                 checked={formData.machineCount === countOption}
                                 onChange={handleInputChange}
                                 className="sr-only"
                               />
-                              <span>{countOption}</span>
+                              <span id={`repair-quote-machine-count-text-${idx + 1}`}>{countOption}</span>
                             </label>
                           ))}
                         </div>
                       </div>
 
                       {/* Machine brand / model */}
-                      <div className="form-group text-left">
-                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]">
-                          Machine Brand / Model <span className="text-slate-400 font-normal lowercase">(optional)</span>
+                      <div className="form-group text-left" id="repair-quote-brand-model-group">
+                        <label className="block text-[12.5px] font-bold text-navy mb-1.5 uppercase tracking-[0.03em]" id="repair-quote-brand-model-label">
+                          Machine Brand / Model <span className="text-slate-400 font-normal lowercase" id="repair-quote-brand-model-optional">(optional)</span>
                         </label>
                         <input
                           type="text"
-                          id="machineBrandModel"
+                          id="repair-quote-machineBrandModel"
                           name="machineBrandModel"
                           value={formData.machineBrandModel}
                           onChange={handleInputChange}
@@ -413,17 +422,18 @@ export default function RepairQuoteForm() {
                 </AnimatePresence>
 
                 {submitError && (
-                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-[13px] text-left">
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-[10px] text-red-600 text-[13px] text-left" id="repair-quote-submit-error">
                     {submitError}
                   </div>
                 )}
 
                 {/* Navigation Buttons */}
-                <div className="flex gap-3 mt-6 items-center">
+                <div className="flex gap-3 mt-6 items-center" id="repair-quote-nav-buttons">
                   {step > 1 && (
                     <button
                       key="btn-back"
                       type="button"
+                      id="repair-quote-back-btn"
                       onClick={handleBack}
                       className="px-6 py-[12px] text-[14px] font-display font-bold text-navy border border-line hover:bg-slate-50 rounded-[10px] transition-all cursor-pointer flex items-center justify-center gap-1.5 focus:outline-none whitespace-nowrap flex-none"
                     >
@@ -434,6 +444,7 @@ export default function RepairQuoteForm() {
                     <button
                       key="btn-continue"
                       type="button"
+                      id="repair-quote-continue-btn"
                       onClick={handleNext}
                       className="flex-1 py-[12px] px-4 text-[14px] font-display font-bold text-white bg-orange hover:bg-orange-dark rounded-[10px] shadow-sm shadow-orange/12 transition-all cursor-pointer flex items-center justify-center gap-1.5 focus:outline-none whitespace-nowrap"
                     >
@@ -443,14 +454,15 @@ export default function RepairQuoteForm() {
                     <button
                       key="btn-submit"
                       type="button"
+                      id="repair-quote-submit-btn"
                       onClick={handleFinalSubmit}
                       disabled={isSubmitting}
                       className="flex-1 py-[12px] px-4 text-[13px] sm:text-[14px] font-display font-bold text-white bg-orange hover:bg-orange-dark rounded-[10px] shadow-sm shadow-orange/12 transition-all cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-85 focus:outline-none whitespace-nowrap"
                     >
                       {isSubmitting ? (
-                        <span>Submitting...</span>
+                        <span id="repair-quote-submitting-text">Submitting...</span>
                       ) : (
-                        <span>Request Vending Service →</span>
+                        <span id="repair-quote-submit-text">Request Vending Service →</span>
                       )}
                     </button>
                   )}
@@ -458,32 +470,34 @@ export default function RepairQuoteForm() {
               </form>
             </div>
 
-            <p className="text-[10px] text-[#5B6472] text-center mt-4 leading-normal">
+            <p className="text-[10px] text-[#5B6472] text-center mt-4 leading-normal" id="repair-quote-disclaimer">
               By submitting, you agree to be contacted about your service request. We never share your data.
             </p>
           </div>
         ) : (
           <motion.div
             key="success"
+            id="repair-quote-success-card"
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="text-center py-4 flex flex-col justify-center items-center h-full min-h-[320px]"
           >
-            <div className="w-[44px] h-[44px] rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3 border border-emerald-100 font-bold text-[18px]">
+            <div className="w-[44px] h-[44px] rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3 border border-emerald-100 font-bold text-[18px]" id="repair-quote-success-icon">
               ✓
             </div>
-            <h4 className="font-display font-bold text-[19px] text-navy mb-1.5">
+            <h4 className="font-display font-bold text-[19px] text-navy mb-1.5" id="repair-quote-success-title">
               Request Received!
             </h4>
-            <p className="text-[#5B6472] text-[13.5px] max-w-xs mx-auto leading-relaxed mb-5">
+            <p className="text-[#5B6472] text-[13.5px] max-w-xs mx-auto leading-relaxed mb-5" id="repair-quote-success-desc">
               Thanks! Your service request has been received. We'll be in touch soon.
             </p>
-            <p className="font-bold text-[14px] text-navy mb-2">
+            <p className="font-bold text-[14px] text-navy mb-2" id="repair-quote-success-subheading">
               Need immediate assistance?
             </p>
             <a
               href="tel:+13852084074"
+              id="repair-quote-success-phone-btn"
               onClick={() => trackPhoneClick("RepairSuccess", "(385) 208-4074")}
               className="inline-flex items-center justify-center gap-2 font-display font-bold text-[14px] text-navy border border-line bg-white hover:border-navy px-5 py-3 rounded-[10px] transition-colors shadow-sm"
             >
@@ -497,10 +511,11 @@ export default function RepairQuoteForm() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="text-orange"
+                id="repair-quote-success-phone-icon"
               >
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>Call CPS: (385) 208-4074</span>
+              <span id="repair-quote-success-phone-text">Call CPS: (385) 208-4074</span>
             </a>
           </motion.div>
         )}

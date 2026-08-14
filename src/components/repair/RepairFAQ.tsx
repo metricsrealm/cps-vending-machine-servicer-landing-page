@@ -43,41 +43,44 @@ export default function RepairFAQ() {
   };
 
   return (
-    <section className="bg-tint py-[78px]" id="faq-section">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <section className="bg-tint py-[78px]" id="repair-faq-section">
+      <div className="max-w-[1200px] mx-auto px-6" id="repair-faq-container">
         {/* Section Header */}
-        <div className="max-w-[680px] mx-auto text-center mb-[46px]">
-          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange">
+        <div className="max-w-[680px] mx-auto text-center mb-[46px]" id="repair-faq-header">
+          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange" id="repair-faq-tagline">
             Repair &amp; Service FAQ
           </span>
-          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 leading-[1.15] tracking-[-0.01em]">
+          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 leading-[1.15] tracking-[-0.01em]" id="repair-faq-heading">
             Frequently asked questions about vending repair
           </h2>
-          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed max-w-[500px] mx-auto">
+          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed max-w-[500px] mx-auto" id="repair-faq-description">
             Don't see your question? Call us — we're happy to help.
           </p>
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="max-w-[780px] mx-auto space-y-3">
-          {faqItems.map((item) => {
+        <div className="max-w-[780px] mx-auto space-y-3" id="repair-faq-list">
+          {faqItems.map((item, idx) => {
             const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
+                id={`repair-faq-item-card-${idx + 1}`}
                 className={`bg-white border rounded-[12px] overflow-hidden transition-all duration-180 ${
                   isOpen ? "border-[#D8E0EC] shadow-md shadow-navy/10" : "border-line"
                 }`}
               >
                 {/* Question Trigger */}
                 <button
+                  id={`repair-faq-btn-${idx + 1}`}
                   onClick={() => toggleItem(item.id)}
                   aria-expanded={isOpen}
                   aria-controls={item.id}
                   className="w-full flex items-center justify-between gap-4 text-left px-[22px] py-[19px] font-display font-semibold text-[16px] text-navy hover:text-orange focus:outline-none cursor-pointer"
                 >
-                  <span>{item.question}</span>
+                  <span id={`repair-faq-question-${idx + 1}`}>{item.question}</span>
                   <svg 
+                    id={`repair-faq-icon-${idx + 1}`}
                     width="20" 
                     height="20" 
                     viewBox="0 0 24 24" 
@@ -105,7 +108,7 @@ export default function RepairFAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                     >
-                      <div className="px-[22px] pb-[20px] pt-0 font-sans text-[#5B6472] text-[15px] leading-relaxed">
+                      <div className="px-[22px] pb-[20px] pt-0 font-sans text-[#5B6472] text-[15px] leading-relaxed" id={`repair-faq-answer-${idx + 1}`}>
                         {item.answer}
                       </div>
                     </motion.div>

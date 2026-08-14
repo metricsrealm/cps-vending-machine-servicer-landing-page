@@ -25,38 +25,39 @@ export default function RepairFeatures() {
   ];
 
   return (
-    <section className="bg-white py-[78px]" id="features-section">
-      <div className="max-w-[1200px] mx-auto px-6">
+    <section className="bg-white py-[78px]" id="repair-features-section">
+      <div className="max-w-[1200px] mx-auto px-6" id="repair-features-container">
         {/* Section Header */}
-        <div className="max-w-[680px] mx-auto text-center mb-[48px]">
-          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange">
+        <div className="max-w-[680px] mx-auto text-center mb-[48px]" id="repair-features-header">
+          <span className="font-display font-bold text-[12px] tracking-[0.14em] uppercase text-orange" id="repair-features-tagline">
             Smart Vending Technology
           </span>
-          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]">
+          <h2 className="font-display font-bold text-[27px] sm:text-[32px] md:text-[38px] text-navy mt-3 mb-3 leading-[1.15] tracking-[-0.01em]" id="repair-features-heading">
             Smart Technology for More Reliable Vending
           </h2>
-          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed">
+          <p className="font-sans text-[#5B6472] text-[16.5px] leading-relaxed" id="repair-features-description">
             CPS uses modern vending technology and real-time machine data to support reliable operation, inventory management, and proactive service.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[960px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[960px] mx-auto" id="repair-features-grid">
           {features.map((feat, idx) => {
             const Icon = feat.icon;
             return (
               <div 
                 key={idx}
+                id={`repair-feature-card-${idx + 1}`}
                 className="bg-tint border border-line rounded-[16px] p-6 sm:p-7 flex gap-5 items-start hover:border-orange/40 transition-all duration-200"
               >
-                <div className="w-[48px] h-[48px] rounded-[12px] bg-white border border-line text-orange flex items-center justify-center flex-shrink-0 shadow-sm">
-                  <Icon className="w-6 h-6" />
+                <div className="w-[48px] h-[48px] rounded-[12px] bg-white border border-line text-orange flex items-center justify-center flex-shrink-0 shadow-sm" id={`repair-feature-icon-wrap-${idx + 1}`}>
+                  <Icon className="w-6 h-6" id={`repair-feature-icon-${idx + 1}`} />
                 </div>
-                <div>
-                  <h3 className="font-display font-bold text-[18px] text-navy mb-2 leading-snug">
+                <div id={`repair-feature-text-wrap-${idx + 1}`}>
+                  <h3 className="font-display font-bold text-[18px] text-navy mb-2 leading-snug" id={`repair-feature-title-${idx + 1}`}>
                     {feat.title}
                   </h3>
-                  <p className="font-sans text-[#5B6472] text-[14.5px] leading-relaxed">
+                  <p className="font-sans text-[#5B6472] text-[14.5px] leading-relaxed" id={`repair-feature-desc-${idx + 1}`}>
                     {feat.desc}
                   </p>
                 </div>
